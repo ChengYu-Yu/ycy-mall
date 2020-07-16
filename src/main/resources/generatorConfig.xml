@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="Mysql" targetRuntime="MyBatis3">
+        <!--给dao增加extends-->
+        <plugin type="ycy.tmall.util.MBGPlugins.DaoExtendsPlugin">
+            <property name="dao" value="ycy.tmall.dao.base.BaseDao"/>
+        </plugin>
+        <!--给domain增加implements-->
+        <plugin type="ycy.tmall.util.MBGPlugins.DomainExtendsPlugin">
+            <property name="domain" value="ycy.tmall.domain.orm.DomainMapper"/>
+        </plugin>
+        <!--给Example增加implements-->
+        <plugin type="ycy.tmall.util.MBGPlugins.ExampleExtendsPlugin">
+            <property name="example" value="ycy.tmall.domain.base.BaseExample"/>
+        </plugin>
+        <!--给select增加deleteAt is null属性-->
+        <plugin type="ycy.tmall.util.MBGPlugins.DeleteAtPlugin">
+        </plugin>
+
+        <commentGenerator>
+            <property name="suppressDate" value="true" />
+        </commentGenerator>
+<!--        数据库连接信息-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/tmall?useUnicode=true&amp;characterEncoding=utf8"
+                        userId="root"
+                        password="mysqlcong0kaishi"></jdbcConnection>
+        <!--        类型解析-->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+<!--        实体类-->
+        <javaModelGenerator targetPackage="ycy.tmall.domain" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!--        映射xml文件-->
+        <sqlMapGenerator targetPackage="ycy.tmall.dao.daoXml" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!--        dao（mapper）接口-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="ycy.tmall.dao" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+        <table tableName="category" domainObjectName="Category" >
+            <property name="rootClass" value="ycy.tmall.domain.extension.CategoryExtension"/>
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="property" domainObjectName="Property" >
+            <property name="rootClass" value="ycy.tmall.domain.extension.PropertyExtension"/>
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="useActualColumnNames" value="true"/>
+
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="product" domainObjectName="Product" >
+            <property name="rootClass" value="ycy.tmall.domain.extension.ProductExtension"/>
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="useActualColumnNames" value="true"/>
+
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="product_image" domainObjectName="ProductImage" >
+            <property name="rootClass" value="ycy.tmall.domain.extension.ProductImageExtension"/>
+            <property name="my.isgen.usekeys" value="true"/>
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="order_" domainObjectName="Order" >
+            <property name="rootClass" value="ycy.tmall.domain.extension.OrderExtension"/>
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="useActualColumnNames" value="true"/>
+
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="property_value" domainObjectName="PropertyValue" >
+            <property name="rootClass" value="ycy.tmall.domain.extension.PropertyValueExtension"/>
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="useActualColumnNames" value="true"/>
+
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="comment" domainObjectName="Comment" >
+            <property name="rootClass" value="ycy.tmall.domain.extension.CommentExtension"/>
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="useActualColumnNames" value="true"/>
+
+            <generatedKey column="id" sqlStatement="JDBC"/>
+            <!--MBG对 sql的text 兼容不佳，需手动指定 jdbcTYPE，否则使用有异常-->
+            <columnOverride column="content" jdbcType="VARCHAR" />
+        </table>
+        <table tableName="user" domainObjectName="User" >
+            <property name="rootClass" value="ycy.tmall.domain.extension.UserExtension"/>
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="useActualColumnNames" value="true"/>
+
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="orderitem" domainObjectName="OrderItem" >
+            <property name="rootClass" value="ycy.tmall.domain.extension.OrderItemExtension"/>
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="useActualColumnNames" value="true"/>
+
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="cartitem" domainObjectName="CartItem" >
+            <property name="rootClass" value="ycy.tmall.domain.extension.CartItemExtension"/>
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="useActualColumnNames" value="true"/>
+
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="config" domainObjectName="Config" >
+            <property name="rootClass" value="ycy.tmall.domain.extension.ConfigExtension"/>
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="useActualColumnNames" value="true"/>
+
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+    </context>
+</generatorConfiguration>
